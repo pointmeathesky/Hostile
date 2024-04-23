@@ -48,9 +48,17 @@ export const signin = async (req, res) => {
         }
     });
     console.log(user)
-    const isValid = await comparePasswords(req.body.Password, user.password);
 
-    if(!isValid) {
+    if(user){
+        const isValid = await comparePasswords(req.body.Password, user.password);
+
+        if(!isValid) {
+            res.status(401);
+            res.send("Invalid username or password");
+            return;
+        }
+    }
+    else{
         res.status(401);
         res.send("Invalid username or password");
         return;
@@ -95,11 +103,20 @@ export const updatePass = async (req, res) => {
 
 
 export const deletUser = async (req, res) => {
-    const deleted = await prisma.user.delete({
+    const delete_posts = await prisma.post.deleteMany({
+        where: {
+            belongsToId: req.user.id
+        }
+    })
+    
+
+    const delete_user = await prisma.user.delete({
         where: {
             id: req.user.id,
         }
     })
+
+   
 
     // res.json({data: deleted})
     res.clearCookie('user');
