@@ -9,6 +9,8 @@ import Landform from "./components/landForm";
 import Browser from "./components/browser";
 import Profile from "./components/profile";
 import Content from "./components/feed";
+import Form from "./components/form";
+import SignUp from "./components/signUp";
 
 
 
@@ -17,7 +19,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 
 
 
-   <Content />
+      <SignUp/>
 
 
 

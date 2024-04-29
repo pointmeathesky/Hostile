@@ -24,6 +24,7 @@
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
     "node-fetch": "^3.3.2",
+    "react-modal": "^3.16.1",
     "supertest": "^6.3.4",
     "ts-jest": "^29.1.2"
   },
