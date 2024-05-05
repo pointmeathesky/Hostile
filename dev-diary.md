@@ -11,7 +11,7 @@ Week 4
 
 Total hours: 11
 
-Accomplishments: fixed 2 bugs where a user could crash the sever, redesigned the signup page. Added a minimum required password length and password verification.
+Summary: fixed 2 bugs where a user could crash the sever, redesigned the signup page. Added a minimum required password length and password verification.
 
 
 Week 5
@@ -24,7 +24,16 @@ Hours: I plan to spend 15-20 hours on this
 05/02 - 5 hours, modifying feed so that only post title and username show up, and you click on the post to view the full post. now a user can click on a post and it takes them to a new page showing that post 
 05/03 - 4 hours, rewriting prisma schema to include comments. needed to make changes to Post, User, Update, and add a Comment model. Rewriting handler for post to include comments, creating a handler to make a post. 
 05/04 - 3 hours, worked on the page to show a single post so that users can comment on a post and comments show up under a post, added ability for user's to delete their posts from their profile, modified the deletepost handler to also delete comments on that post, added a deleteComment handler
-Total Hours: 17
+
+Total Hours: 18
+Summary: Substantially modified the post component. Post creation is now a modal instead of a separate page. Posts in the feed now only show the title and author. Each post in the feed is now a link that takes users to a separate page showing only that post. On that page users can view the post, other comments, and make a comment. Users can now delete their posts from their profile page.
+
+
+Week 6:
+Goals: This week I want to work on allowing picture uploads so that users can upload images for posts and have profile pictures. 
+Hours: I plan to spend 15-20 hours on this
+
+
 to do:
 
 posts:
@@ -35,7 +44,7 @@ posts:
     [X]redesign the page to make a post/ have the post creation be a modal instead of a separate page
     []on user's profile, make the posts shown linkable
     []add requirements to post submission so that a user can't submit a post without a title 
-
+    
 
 security issues:
 
