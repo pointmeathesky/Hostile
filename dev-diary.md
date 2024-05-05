@@ -20,15 +20,21 @@ Goals: Focus on the post component. Get the component to create a post to a plac
 Hours: I plan to spend 15-20 hours on this 
 
 04/28 - 3 hours, worked on the post page, trying to improve its appearance and exploring using a modal instead 
-
-
+04/29 - 3 hours, remade the create a post as a modal instead of a seprate page. the modal is accessed by clicking on the post icon on the desktop
+05/02 - 5 hours, modifying feed so that only post title and username show up, and you click on the post to view the full post. now a user can click on a post and it takes them to a new page showing that post 
+05/03 - 4 hours, rewriting prisma schema to include comments. needed to make changes to Post, User, Update, and add a Comment model. Rewriting handler for post to include comments, creating a handler to make a post. 
+05/04 - 3 hours, worked on the page to show a single post so that users can comment on a post and comments show up under a post, added ability for user's to delete their posts from their profile, modified the deletepost handler to also delete comments on that post, added a deleteComment handler
+Total Hours: 17
 to do:
 
 posts:
 
-    []show just the post title and have users click on the post to expand to show the body, allow users to make comments on posts
-    []add a way for users to delete their posts
-    []redesign the page to make a post/ have the post creation be a modal instead of a separate page
+    [X]show just the post title and have users click on the post to expand to show the body
+    [X]allow users to make comments on posts
+    [X]add a way for users to delete their posts
+    [X]redesign the page to make a post/ have the post creation be a modal instead of a separate page
+    []on user's profile, make the posts shown linkable
+    []add requirements to post submission so that a user can't submit a post without a title 
 
 
 security issues:

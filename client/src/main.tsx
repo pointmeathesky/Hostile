@@ -11,6 +11,7 @@ import Profile from "./components/profile";
 import Content from "./components/feed";
 import Form from "./components/form";
 import SignUp from "./components/signUp";
+import Posting from "./components/viewPost";
 
 
 
@@ -19,7 +20,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 
 
 
-      <SignUp/>
+      <Desktop/>
 
 
 

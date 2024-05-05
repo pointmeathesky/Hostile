@@ -2,10 +2,13 @@
 import icon from "../static/win.png"
 import React, { useState, useEffect } from "react";
 import Cookies from 'js-cookie';
+import PostModal from "./components/postModal";
+import Post from "./components/Post";
+
 
 
 function Desktop({content}:{content?:any}) {
-
+    const [showModal, setShowModal] = useState(false);
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [colo, setColo] = useState("invert-0");  
   const [changed, change] = useState(false);
@@ -13,20 +16,21 @@ function Desktop({content}:{content?:any}) {
     const uname = Cookies.get('user');
     setIsSignedIn(!!uname);
 
-    if (!!uname) {
-      setColo("invert");
-      change(true);
-    } else {
-      setColo("invert-0");
-      change(false);
-    }
+    // if (!!uname) {
+    //   setColo("invert");
+    //   change(true);
+    // } else {
+    //   setColo("invert-0");
+    //   change(false);
+    // }
   }, []);
 
 
 
+    const openModal = () => {
+        setShowModal(true);
+    };
 
-const post = isSignedIn? <img className="object-contain h-16 w-16" src="/static/notebook.png"/> : <img  src="/static/post.png"/> 
-const discover = isSignedIn? <img className="object-contain h-16 w-16" src="/static/discover.png"/> : <img  src="/static/disc.png"/>
 
 function invColors() {
   if (!changed){
@@ -55,18 +59,19 @@ const SignIn = () => {
 const Profile = () => {
   return(
   <div><button className=" mx-2 mt-8 px-4 text-sm   hover:text-white  hover:bg-blue-900 hover:bg-opacity-50" >
-                <a href="/api/profile">
-                  <img className="object-contain " src="/static/profi.jpg" /> 
-                    Profile
-                </a>
-              </button></div>
+      <a href="/api/profile">
+          <img src="/static/sign.png"/>
+          Profile
+      </a>
+  </button>
+  </div>
   )
 }
 
 const Abyss = () => {
   return (
     <div><button className="mx-2 mt-8 px-4 text-sm hover:text-white hover:bg-blue-900 hover:bg-opacity-50">
-            <a href="/">
+            <a href="/feed">
             <img className="object-contain h-14" src="/static/abyss.png"/>
               Abyss
               </a>
@@ -82,16 +87,16 @@ const Abyss = () => {
         {isSignedIn ?  <Profile/> :  <SignIn/>}
               
                
-              <div><button className="mx-2 mt-8 px-4 text-sm hover:text-white  hover:bg-blue-900 hover:bg-opacity-50">
-                <a href="/post">
-                {post}
+              <div><button className="mx-2 mt-8 px-4 text-sm hover:text-white  hover:bg-blue-900 hover:bg-opacity-50" onClick={openModal}>
+                <a >
+                    <img  src="/static/post.png"/>
                     Post
                 </a>
               </button></div>
 
               <div><button className="mx-1 mt-8 px-4 text-sm hover:text-white hover:bg-blue-900 hover:bg-opacity-50">
                 <a href="/menu">
-                  {discover}
+                    <img  src="/static/disc.png"/>
                   Discover
                 </a>
               </button></div>
@@ -99,7 +104,10 @@ const Abyss = () => {
               {isSignedIn ?  <Abyss/> : null }
         </div>
 
-        
+          <PostModal showModal={showModal} setShowModal={setShowModal}>
+
+              <Post/>
+          </PostModal>
       
       {content}
       </div>

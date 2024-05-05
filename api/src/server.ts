@@ -92,5 +92,16 @@ app.get('/feed', (req,res) => {
 
 })
 
+app.get('/viewpost/:id', (req,res) => {
+    console.log("got to the route handler")
+    res.status(200)
+    res.sendFile(path.resolve("../client/dist/viewPost/index.html"))
+})
+app.get('/viewpost', (req,res) => {
+    console.log("got to the route handler")
+    res.status(200)
+    res.sendFile(path.resolve("../client/dist/seePost/index.html"))
+})
+
 
 export default app

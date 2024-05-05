@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Browser from './browser';
 import Window from './windowFeed';
 import Desktop from '../Desktop';
-
+import { Link } from 'react-router-dom';
 function BuildContent() {
   const [jsonData, setJsonData] = useState([]);
 
@@ -37,9 +37,15 @@ function BuildContent() {
         <div key={index} className="pr-8 pb-8 relative ">
           {/* <div className="flex flex-wrap justify-center bg-bargray hover:bg-panelgray border-black border-2 text-white font-bold px-2 py-4 m-2 w-full"> */}
           <div className={`flex-wrap bg-gradient-to-l ${index % 2 === 0 ? 'from-cyan-500 to-blue-500 ' : ' from-purple-500 to-pink-500'} hover:bg-gradient-to-r border-black border-2 text-center text-black font-bold p-4 mb-4`}>
-            <h2 className='text-2xl'>{post.name} </h2>  <br/>
-            <h2 className='text-sm'>  by {post.belongsTo.username}</h2>
-            <p className='text-md'>{post.body}</p>
+
+            <a href={`/viewpost/?id=${post.id}`}>
+
+
+              <h2 className='text-2xl'>{post.name} </h2>  <br/>
+              <h2 className='text-sm'> by {post.belongsTo.username}</h2>
+
+            </a>
+            {/*<p className='text-md'>{post.body}</p>*/}
           </div>
         </div>
       ))}

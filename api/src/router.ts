@@ -1,9 +1,10 @@
 import {Router} from 'express'
 import { body, oneOf, validationResult } from 'express-validator'
 import { handleInputErrors } from './modules/middleware'
-import { createPost, getPost, getPosts, updatePost, deletPost, Posts } from './handlers/posts'
+import { createPost, getPost, getPosts, createComment, updatePost, deletPost, Posts } from './handlers/posts'
 import { deletUser, updateUser, updatePass, logout, Users } from './handlers/user'
 import path from 'path'
+import app from "./server";
 
 const router = Router()
 //user
@@ -21,6 +22,8 @@ router.get('/allUsers', (req,res) => {
 
 
 
+router.post('/makecomment',createComment )
+
 
 router.get('/allposts', Posts)
 
@@ -30,6 +33,9 @@ router.get('/users', Users)
 
 router.post('/logoff',logout )
 
+router.post('/deletepost', deletPost)
+
+
 router.post('/updateUser', updateUser)
 
 router.post('/updatePass', updatePass)
@@ -38,9 +44,11 @@ router.post('/makepost', createPost)
 
 router.get('/posts', getPosts)
 
-// router.get('/post', getPost)
+ // router.get('/post', getPost)
+router.get('')
 
-router.get('/post/:id', () => {})
+
+router.get('/post/:id', getPost)
 router.put('/post/:id', body('name'),handleInputErrors, (req, res) => {
     
 })

@@ -1,0 +1,1 @@
+import{c as o,j as t,R as e}from"./client-6c7af3ad.js";import"./styles-4ed993c7.js";import{D as r}from"./Desktop-6148bd56.js";import"./js.cookie-edb2da2a.js";import"./Post-24424945.js";o.createRoot(document.getElementById("root")).render(t(e.StrictMode,{children:t(r,{})}));

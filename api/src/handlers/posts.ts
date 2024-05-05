@@ -7,9 +7,25 @@ export const getPost = async (req,res) => {
     const post = await prisma.post.findFirst({
         where: {
             id,
-            belongsToId: req.user.id
+            // belongsToId: req.user.id
+
+        },
+        include: {
+            belongsTo: {
+                select:{
+                    username: true
+                }
+            },
+            comments: {
+                include: {
+                    belongsTo: {
+                        select: {username: true}
+                    }
+                }
+            }
         }
     })
+
     res.json({data: post})
 }
 
@@ -24,6 +40,7 @@ export const Posts = async (req,res)=> {
         select: {
             name: true,
             body:true,
+            id:true,
             belongsTo: {
                 select:{
                     username: true
@@ -63,11 +80,35 @@ export const createPost = async (req, res) => {
     // res.json({data: post})
 }
 
+export const createComment = async (req, res) => {
+    try {
+
+        if (!req.body.postId) {
+            return res.status(400).json({ error: 'Post ID is required.' });
+        }
+        const comment = await prisma.comment.create({
+
+            data: {
+                body: req.body.comment,
+                belongsToId: req.user.id,
+                postId: req.body.postId
+            }
+        });
+
+        return res.redirect(`/viewpost/?id=${req.body.postId}`);
+
+    } catch (error) {
+
+        console.error('Failed to create comment:', error);
+        return res.status(500).json({ error: 'Failed to create comment' });
+    }
+}
+
 //needs to be tested - needs interface
 export const updatePost = async (req, res) => {
     const updated = await prisma.post.update({
         where: {
-            id: req.params.id
+            id: req.body.id
         },
 
         data: {
@@ -78,17 +119,32 @@ export const updatePost = async (req, res) => {
     res.json({data: updated})
 }
 
-//needs to be tested - needs interface
+//works
 export const deletPost = async (req, res) => {
+    const deleteComment = await prisma.comment.deleteMany ({
+        where: {
+            postId: req.body.postId
+        }
+    })
     const deleted = await prisma.post.delete({
         where: {
             id_belongsToId: {
-                id: req.params.id,
+                id: req.body.postId,
             belongsToId: req.user.id
             }
             
         }
     })
 
-    res.json({data: deleted})
+    return res.redirect('/api/profile')
+}
+
+export const deleteComment = async (req, res) => {
+    const deleteComment = await prisma.comment.deleteMany ({
+        where: {
+            belongsToId: req.user.id,
+            postId: req.body.postId
+        }
+    })
+    res.json({data: deleteComment})
 }

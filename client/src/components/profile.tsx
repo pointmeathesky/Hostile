@@ -68,6 +68,10 @@ const Contents = () => {
                         <li key={index}>
                             <strong>{item.name}</strong> <br />
                             {item.body}
+                            <form action="/api/deletePost" method="post">
+                                <input type="hidden" name="postId" value={item.id}/>
+                                <button type="submit" >Delete Post</button>
+                            </form>
                         </li>
                     ))}
                 </ul>

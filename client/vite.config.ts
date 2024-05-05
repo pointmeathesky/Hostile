@@ -18,6 +18,8 @@ export default defineConfig({
         catchall: resolve(__dirname, 'catchall/index.html'),
         menu: resolve(__dirname, 'menu/index.html'),
         feed: resolve(__dirname, 'feed/index.html'),
+        seepost: resolve(__dirname, 'seePost/index.html'),
+
       },
     },
   },
