@@ -1,6 +1,6 @@
 import prisma from "../db"
 
-//this one works, needs interface
+//this one works
 export const getPost = async (req,res) => {
     const id = req.params.id
 
