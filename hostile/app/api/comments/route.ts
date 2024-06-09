@@ -10,9 +10,9 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
     }
 
-    const posts = await prisma.post.findMany({
+    const comments = await prisma.comment.findMany({
         where: { belongsToId: session.user.id },
     });
 
-    return NextResponse.json({ data: posts });
+    return NextResponse.json({ data: comments });
 }

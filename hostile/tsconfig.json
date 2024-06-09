@@ -26,7 +26,8 @@
         "./*"
       ]
     },
-    "strictNullChecks": false
+    "strictNullChecks": false,
+    "types": ["next-auth"]
   },
   "include": [
     "next-env.d.ts",

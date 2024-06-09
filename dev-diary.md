@@ -60,6 +60,48 @@ Hours: I plan to spend around 15 hours on this
 
 05/14 - 2 hours, read next.js documentation on authentication, began rewriting code to authetnicate a user
 
+05/15 - 3 hours, changed schema to add in a session, worked on setting up sessions to verify if a user is logged in or not
+
+05/17 - 4 hours, rewrote code for users to login and register. running into a lot of issues with the session not being recognized, and trying to troubleshoot that. user registration and logon work but the user is not recognized as an authenticated user
+
+05/18 - 8 hours, continued trying to fix issues with authentication and middleware so that authenticated users are recognized properly. tried rewriting login and registration again, read through next-auth and authjs documentation
+
+Total Hours: 17
+
+Summary: Authentication has been really difficult and is taking longer than I thought it would. I thought a week was a reasonable goal for getting it all set up but I'm still struggling with getting sessions to work properly. I've rewritten all of my route handlers to work in nextjs. But I'm still working on protecting them properly.
+
+### Week 8 
+
+Goals:get sessions to work properly and routes to be protected. have a user
+
+Hours:
+05/21 - 3 hours - reading through next-auth documentation rewriting nextauth configuration 
+
+05/22 - 5 hours - authentication is finally complete! sessions now work exactly as they should, rewrote profile, posts, and signin/register components to change the way data is fetched and submitted
+
+05/23 - 9 hours - redesigning appearance of site. reworking site to be one page and opening up individual components as windows in the page, making windows draggable, 
+
+**Total Hours** : 17
+
+**Summary**:Completed set up of authentication, 
+
+### Week 9
+Goals: Get site ready to be used by people, no major changes at this point. I just want to polish the look and make it easy and intuitive for people to use
+
+05/27 - 4 hours - added the ability to minimize windows, now each open component is shown on the bottom navbar. clicking on the component will bring it to the front
+05/29 - 3 hours - added the ability to maximize windows, now each component can be made to take up the whole screen. Clicking the button again will bring it back to its original size 
+05/30 - 6 hours - added in a second window component to use with the Menu and Post Components. Changed create a post from a modal to a window
+06/01 - 3 hours - added the comments users made to their profile, wrote route handler to delete comments, and added button to profile so users can delete their comments
+
+**Total Hours**: 16
+
+**Summary**:  added features to the windows so they can be minimized and maximized, added the ability to delete comments. 
+
+### Week 10
+Goals: stop using AWS to host my database, set it up local hosting
+
+06/03 - 9 hours, making poster, creating proper linkage between signup and signin. made sure signup component closes when it opens signin, changed signin so that it will open up the profile component and close itself when a user successfully signs in.
+
 
 to do:
 
@@ -69,9 +111,9 @@ posts:
     [X]allow users to make comments on posts
     [X]add a way for users to delete their posts
     [X]redesign the page to make a post/ have the post creation be a modal instead of a separate page
-    []on user's profile, make the posts shown linkable
-    []add requirements to post submission so that a user can't submit a post without a title
-    []have single posts pop up as an additional window beside the feed instead of redirecting to a different page
+    [X]on user's profile, make the posts shown linkable
+    [X]add requirements to post submission so that a user can't submit a post without a title
+    [X]have single posts pop up as an additional window beside the feed instead of redirecting to a different page
     
 
 security issues:
@@ -84,15 +126,15 @@ security issues:
 
 
 
-- make a bullettin board
-
 - fix ssl issues, I originally set the ssl certificate up for a different domain and did a very lazy job adding in the hostile domain which is causing users to get a security warning when they visit the site
 
-- get rid of forced color inversion and changed icons.
+[X]get rid of forced color inversion and changed icons.
 
 - User Account customization- profile pictures, text color, site color scheme(?)
 
-- Have log in error messages show up on the log in page instead of a new page where the user then has to go back
+- change 404 page to be the under construction page previously built
+- 
+[X]Have log in error messages show up on the log in page instead of a new page where the user then has to go back
 
 
 

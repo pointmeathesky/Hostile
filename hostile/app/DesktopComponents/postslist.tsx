@@ -1,12 +1,14 @@
-'use client'
-import React, { useEffect, useState } from 'react';
-import Browser from "@/app/components/browser";
-import Desktop from "@/app/page";
-import Window from "@/app/components/window";
+'use client';
+import React, { useState, useEffect } from 'react';
 
-function Posts() {
+function truncate(str, n) {
+    return (str.length > n) ? str.substr(0, n - 1) + '...' : str;
+}
+
+
+const PostsList = ({ onPostSelect }) => {
     const [posts, setPosts] = useState([]);
-    const [isLoading, setIsLoading] = useState(true); // Start with true to show loading initially
+    const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -33,25 +35,14 @@ function Posts() {
 
     return (
         <ul>
-            {posts.map((post,) => (
-                <div className={`flex-wrap   hover:bg-bargray border-bargray border-2 text-center text-black font-bold w-full p-4 m-2 mb-2`}>
-                <a href={`/posts/${post.id}`}>
-
-
-                    <h2 className='text-2xl'>{post.name} </h2>  <br/>
-                    <h2 className='text-sm'> by {post.belongsTo.username}</h2>
-
-                </a>
-                </div>
+            {posts.map(post => (
+                <li key={post.id} onClick={() => onPostSelect(post.id)} className="group cursor-pointer pb-3 ">
+                   <div className={"group-hover:underline font-bold text-xl"}> {post.name}</div>
+                    <div className={"border-b"}>{truncate(post.body, 70)}</div>
+                </li>
             ))}
         </ul>
     );
 }
 
-function Feed() {
-    return (
-        <Window content={<Posts/>}/>
-    )
-}
-
-export default Feed;
+export default PostsList;

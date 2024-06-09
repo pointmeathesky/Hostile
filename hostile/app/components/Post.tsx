@@ -1,68 +1,72 @@
-import Browser from "./browser";
-import React, {useState} from "react";
-import PostModal from "./postModal";
-import Desktop from "../Desktop";
+import React, { useState } from "react";
+import { useRouter } from 'next/navigation';
 
-const Contents = () => {
-    const [showModal, setShowModal] = useState(false);
+const Post = () => {
+    const [name, setName] = useState("");
+    const [body, setBody] = useState("");
+    const [error, setError] = useState<string | null>(null);
+    const [success, setSuccess] = useState<string | null>(null);
+    const router = useRouter();
 
-    const Form = () => {
-        return (
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setError(null);
+        setSuccess(null);
 
-            <form
-                className="flex flex-col pt-6   min-w-full justify-items-center content-center  self-center bg-panelgray"
-                action="/api/makepost" method="post">
+        try {
+            const response = await fetch('/api/makepost', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, body }),
+            });
 
-                <input className=" mx-4 p-2 xs:min-w-80 sm:min-w-96  text-l border border-black " type="text" placeholder="Title"
-                       name="name" id="name"/><br></br>
-                <textarea className="mx-4 min-h-48 mt-2 p-2  text-m   border border-black min-w-40" placeholder="Body" name="body"
-                          id="body"/> <br></br>
-                <button className="w-full mt-2 px-2 bg-bargray border border-cus" type="submit">Create Post</button>
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Error creating post');
+            }
 
-            </form>
+            const data = await response.json();
+            setSuccess('Post created successfully!');
+            setName("");
+            setBody("");
 
-        )
-    }
-    const openModal = () => {
-        setShowModal(true);
+            // Navigate to /posts after successful post creation
+            router.push('/posts');
+        } catch (error: any) {
+            setError(error.message);
+        }
     };
 
     return (
-        <div>
-            <button
-                className="bg-panelgray active:bg-bargray font-bold uppercase text-sm px-6 py-3 shadow hover:shadow-lg
-                border border-cus outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                type="button"
-                onClick={openModal}
-            >
-                Modify Account
+        <form className="flex flex-col pt-6 min-w-full justify-items-center content-center self-center bg-panelgray" onSubmit={handleSubmit}>
+            <input
+                className="mx-4 p-2 xs:min-w-80 sm:min-w-96 text-l border border-black"
+                type="text"
+                placeholder="Title"
+                name="name"
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+            />
+            <br />
+            <textarea
+                className="mx-4 min-h-48 mt-2 p-2 text-m border border-black min-w-40"
+                placeholder="Body"
+                name="body"
+                id="body"
+                value={body}
+                onChange={(e) => setBody(e.target.value)}
+            />
+            <br />
+            <button className="w-full mt-2 px-2 bg-bargray border border-cus" type="submit">
+                Create Post
             </button>
-            <PostModal showModal={showModal} setShowModal={setShowModal}>
-
-                <Form/>
-            </PostModal>
-
-        </div>
-    )
-}
-
-const Post = () => {
-    return (
-
-        <form
-            className="flex flex-col pt-6   min-w-full justify-items-center content-center  self-center bg-panelgray"
-            action="/api/makepost" method="post">
-
-            <input className=" mx-4 p-2 xs:min-w-80 sm:min-w-96  text-l border border-black " type="text" placeholder="Title"
-                   name="name" id="name"/><br></br>
-            <textarea className="mx-4 min-h-48 mt-2 p-2  text-m   border border-black min-w-40" placeholder="Body" name="body"
-                      id="body"/> <br></br>
-            <button className="w-full mt-2 px-2 bg-bargray border border-cus" type="submit">Create Post</button>
-
+            {error && <p className="text-red-500">{error}</p>}
+            {success && <p className="text-green-500">{success}</p>}
         </form>
+    );
+};
 
-    )
-}
-
-
-export default Post
+export default Post;

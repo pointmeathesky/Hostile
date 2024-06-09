@@ -1,32 +1,35 @@
-import { PrismaClient } from "@prisma/client";
+import { NextRequest, NextResponse } from 'next/server';
+import prisma from '../../../db';
 
-const prisma = new PrismaClient();
+export async function GET(req: NextRequest, { params }: { params: { slug: string } }) {
+    const id = params.slug;
 
-export async function GET(req,res) {
-    console.log(res.params.slug)
-    const id =res.params.slug
-
-    const post = await prisma.post.findFirst({
-        where: {
-            id,
-            // belongsToId: req.user.id
-
-        },
-        include: {
-            belongsTo: {
-                select:{
-                    username: true
-                }
-            },
-            comments: {
-                include: {
-                    belongsTo: {
-                        select: {username: true}
+    try {
+        const post = await prisma.post.findFirst({
+            where: { id },
+            include: {
+                belongsTo: {
+                    select: {
+                        username: true
+                    }
+                },
+                comments: {
+                    include: {
+                        belongsTo: {
+                            select: { username: true }
+                        }
                     }
                 }
             }
+        });
+
+        if (!post) {
+            return NextResponse.json({ error: 'Post not found' }, { status: 404 });
         }
-    })
-    return new Response(JSON.stringify({data: post}))
-    // return ({data: post})
+
+        return NextResponse.json({ data: post });
+    } catch (error) {
+        console.error('Error fetching post:', error);
+        return NextResponse.json({ error: 'Error fetching post' }, { status: 500 });
+    }
 }

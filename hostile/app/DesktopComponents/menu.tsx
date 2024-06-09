@@ -1,7 +1,7 @@
 'use client'
 
 import React from "react";
-import Window from "../components/window";
+
 import Desktop from "../page";
 import ImageModal from "../components/ImageModal";
 
@@ -106,10 +106,5 @@ const Page = () => {
     );
 };
 
-const FullMenu = () => {
-    return (
-        <Window content={<Page/>}/>
-    )
-}
 
-export default FullMenu;
+export default Page;

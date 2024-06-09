@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import Desktop from "@/app/page";
 import Browser from "@/app/components/browser";
 
-function Form() {
+function SignUp({ handleContentChange, onClose }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState<string | null>(null);
@@ -22,15 +22,19 @@ function Form() {
         });
 
         if (result?.ok) {
-            router.push('/profile');
+            //router.push('/');
+            //close the current component, open the profile component
+            handleContentChange('profile', {}, onClose);
+            onClose();
         } else {
+            // Handle sign-in error
             console.error('Sign-in failed', result?.error);
             setError('Incorrect Username or Password');
         }
     };
 
     return (
-        <div className="h-min w-full bg-white border-4 border-panelgray justify-center mb-4 mx-6">
+        <div className="h-min w-full bg-white border-4 border-panelgray justify-center mb-4 ">
             <div className={"bg-winblue border-black border-b"}>
                 <h1 className={"text-2xl font-bold text-center p-2"}>Welcome to Hostile!</h1>
             </div>
@@ -69,7 +73,7 @@ function Form() {
                     /><br></br>
                 </div>
 
-                <button className="p-2 rounded font-bold hover:border-2 border border-black" type="submit">
+                <button className="p-2 rounded font-bold hover:bg-winblue hover:text-white border border-black" type="submit">
                     Sign In
                 </button>
             </form>
@@ -78,10 +82,6 @@ function Form() {
     );
 }
 
-const SignUp = () => {
-    return (
-        <Browser content={<Form />} />
-    )
-}
+
 
 export default SignUp;
