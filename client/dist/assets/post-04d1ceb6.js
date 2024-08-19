@@ -1,1 +1,0 @@
-import{c as e,j as t,R as o}from"./client-6c7af3ad.js";import{P as r}from"./Post-24424945.js";import"./styles-4ed993c7.js";e.createRoot(document.getElementById("root")).render(t(o.StrictMode,{children:t(r,{})}));
