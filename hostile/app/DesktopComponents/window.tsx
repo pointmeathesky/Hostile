@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import Draggable from 'react-draggable';
 import ButtonPicker from "../components/ButtonPicker";
+import Image from 'next/image';
 
 const DraggableWindow = ({ title, children, onClose, onMinimize, zIndex, bringToFront }) => {
     const nodeRef = useRef(null);
@@ -18,7 +19,7 @@ const DraggableWindow = ({ title, children, onClose, onMinimize, zIndex, bringTo
         if (typeof window !== 'undefined') {
             setUrl(window.location.href + title);
         }
-    }, []);
+    }, [title]);
 
     const handleMaximize = () => {
         if (isMaximized) {
@@ -66,7 +67,7 @@ const DraggableWindow = ({ title, children, onClose, onMinimize, zIndex, bringTo
             >
                 {/* Top panel */}
                 <div className="flex flex-row items-center bg-bargray border-b draggable-handle cursor-move">
-                    <img className="object-contain" src="/inet.png" />
+                    <Image className="object-contain" src="/inet.png" alt={"internet icon"} />
                     <p className="text-white text-start">{title}</p>
                     <div className="flex ml-auto justify-end pr-1 font-bold">
                         <button
@@ -113,7 +114,7 @@ const DraggableWindow = ({ title, children, onClose, onMinimize, zIndex, bringTo
 
                 {/* Bottom panel */}
                 <div className="flex flex-row bg-panelgray text-black">
-                    <img className="my-1 px-1 self-center" src="/inet.png" />
+                    <Image className="my-1 px-1 self-center" src="/inet.png" alt={"internet icon"}/>
                     <p className="text-sm self-center">Done</p>
                 </div>
             </div>

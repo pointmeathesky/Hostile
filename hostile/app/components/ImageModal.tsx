@@ -1,6 +1,6 @@
 import React from "react";
 import ReactModal from "react-modal";
-
+import Image from 'next/image';
 interface ImageModalProps {
     isOpen: boolean;
     onRequestClose: () => void;
@@ -46,7 +46,7 @@ const ImageModal: React.FC<ImageModalProps> = ({
             contentLabel={contentLabel}
             style={modalStyles}
         >
-            <img src={imageUrl} alt="Modal Image" style={{ width: "100%" }} />
+            <Image src={imageUrl} alt="Modal Image" style={{ width: "100%" }} />
         </ReactModal>
     );
 };

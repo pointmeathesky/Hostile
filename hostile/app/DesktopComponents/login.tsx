@@ -3,8 +3,7 @@
 import { signIn } from 'next-auth/react';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Desktop from "@/app/page";
-import Browser from "@/app/components/browser";
+import Image from 'next/image';
 
 function SignUp({ handleContentChange, onClose }) {
     const [username, setUsername] = useState('');
@@ -39,7 +38,7 @@ function SignUp({ handleContentChange, onClose }) {
                 <h1 className={"text-2xl font-bold text-center p-2"}>Welcome to Hostile!</h1>
             </div>
             <div className={`flex flex-row w-full basis-1/6 pt-2 justify-center`}>
-                <img className="object-contain size-1/6" src="/logo3.png" />
+                <Image className="object-contain size-1/6" src="/logo3.png" alt={"logo"}/>
             </div>
             {error && <p className={"text-red-600 text-center pt-6"} >{error}</p>}
             <form

@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import Desktop from "../page";
+import Image from 'next/image';
 import ImageModal from "../components/ImageModal";
 
 const Page = () => {
@@ -35,7 +35,7 @@ const Page = () => {
                         <h2 className="text-6xl font-bold py-4 px-36 text-center">Channels</h2>
                     </div>
                     <div className="flex-1 flex justify-center pb-4">
-                        <img
+                        <Image
                             src="https://www.webdesignmuseum.org/uploaded/exhibitions/web-banners-in-the-90s/at-t-the-first-banner-1994.png"
                             alt="The first web banner AT&amp;T 1994" title="The first web banner AT&amp;T 1994"
                         />
@@ -64,7 +64,7 @@ const Page = () => {
                         <div
                             className="bannerAd flex items-center justify-center w-full h-full pb-6">
                             <a>
-                                <img className="border border-black"
+                                <Image className="border border-black"
                                     src="https://www.webdesignmuseum.org/uploaded/exhibitions/web-banners-in-the-90s/macromedia-flash-3-1998.gif"
                                     alt="Macromedia Flash 3.0 1998" title="Macromedia Flash 3.0 1998"
                                 />
@@ -74,12 +74,12 @@ const Page = () => {
                     </div>
                     <div className="flex-1 flex justify-end pr-8 pb-4">
                         <div className="pr-4">
-                            <img
+                            <Image
                                 src="https://www.webdesignmuseum.org/uploaded/exhibitions/web-banners-in-the-90s/get-flash-player-1996.gif"
                                 alt="Get Flash Player banner 1996" title="Get Flash Player 1996"/>
                         </div>
                         <div className="pr-4">
-                            <img
+                            <Image
                                 src="https://www.webdesignmuseum.org/uploaded/exhibitions/web-banners-in-the-90s/netscape-1995.gif"
                                 alt="Netscape banner 1995"
                                 title="Netscape 1995"
@@ -87,7 +87,7 @@ const Page = () => {
                         </div>
                         <div>
                             <div className="pr-4" onClick={openImageModal}>
-                                <img
+                                <Image
                                     src="https://www.webdesignmuseum.org/uploaded/exhibitions/web-banners-in-the-90s/internet-explorer-1996.gif"
                                     alt="Internet Explorer banner 1996"
                                     title="Internet Explorer 1996"

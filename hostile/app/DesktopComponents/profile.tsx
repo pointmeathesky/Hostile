@@ -127,7 +127,7 @@ const Profile = ({ onPostSelect }) => {
         <div>
             <button className="border-b-2 r" onClick={handleLogout}>Logout</button>
 
-            <h1 className="text-4xl font-bold text-center ">{session?.user?.name || 'User'}'s Profile</h1>
+            <h1 className="text-4xl font-bold text-center ">{session?.user?.name || 'User'}&apos;s Profile</h1>
             <Tabs>
                 <TabList>
                     <Tab>Posts</Tab>

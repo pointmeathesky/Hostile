@@ -11,6 +11,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Window from "@/app/DesktopComponents/window2";
 import Menu from "@/app/DesktopComponents/menu";
 import SignUp from "@/app/DesktopComponents/signup";
+import Image from 'next/image';
 
 interface ActiveWindow {
     id: string;
@@ -100,7 +101,7 @@ function Desktop() {
             <div>
                 <button className="mx-2 mt-8 px-4 text-sm hover:text-white hover:bg-blue-900 hover:bg-opacity-50"
                         onClick={() => handleContentChange('signup')}>
-                    <img src="/sign.png" />
+                    <Image src="/sign.png" alt={"sign"} />
                     Sign In
                 </button>
             </div>
@@ -114,7 +115,7 @@ function Desktop() {
                     className="mx-2 mt-8 px-4 text-sm hover:text-white hover:bg-blue-900 hover:bg-opacity-50"
                     onClick={() => handleContentChange('profile')}
                 >
-                    <img src="/sign.png" />
+                    <Image src="/sign.png" alt={"sign"}/>
                     Profile
                 </button>
             </div>
@@ -128,7 +129,7 @@ function Desktop() {
                     className="mx-2 mt-8 px-4 text-sm hover:text-white hover:bg-blue-900 hover:bg-opacity-50"
                     onClick={() => handleContentChange('posts')}
                 >
-                    <img className="object-contain h-14" src="/abyss.png" />
+                    <Image className="object-contain h-14" src="/abyss.png" alt={"abyss"}/>
                     Abyss
                 </button>
             </div>
@@ -142,7 +143,7 @@ function Desktop() {
                     className="mx-2 mt-8 px-4 text-sm hover:text-white hover:bg-blue-900 hover:bg-opacity-50"
                     onClick={() => handleContentChange('post')}
                 >
-                    <img  src="/post.png" />
+                    <Image  src="/post.png" alt={"post"}/>
                     Post
                 </button>
             </div>
@@ -156,7 +157,7 @@ function Desktop() {
                     className="mx-1 mt-8 px-4 text-sm hover:text-white hover:bg-blue-900 hover:bg-opacity-50"
                     onClick={() => handleContentChange('menu')}
                 >
-                    <img src="/disc.png" />
+                    <Image src="/disc.png" alt={"disc"} />
                     Discover
                 </button>
             </div>
@@ -221,7 +222,7 @@ function Desktop() {
                 className="fixed bottom-0 bg-panelgray text-black flex flex-row items-center  w-full h-7 text-lg border-t">
                 <button onClick={invColors} className="mx-2 px-2 shadow-lg border border-cus border-opacity-75">
                     <div className="flex flex-row">
-                        <img src="/win.png" />
+                        <Image src="/win.png" alt={"computer"} />
                         <span className="text-sm px-2">Start</span>
                     </div>
                 </button>

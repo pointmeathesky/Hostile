@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import validator from 'validator';
+import Image from 'next/image';
 
 const SignUp = ({ handleContentChange, onClose }) => {
     const [badPass, setBadPass] = useState('');
@@ -32,7 +33,7 @@ const SignUp = ({ handleContentChange, onClose }) => {
                 <h1 className={"text-2xl font-bold text-center p-2"}>Welcome to Hostile!</h1>
             </div>
             <div className={`flex flex-row  w-full basis-1/6 pt-2 justify-center  `}>
-                <img className="object-contain size-1/6 " src="/logo3.png" />
+                <Image className="object-contain size-1/6 " src="/logo3.png" alt={"logo"} />
             </div>
             <form
                 className=" text-black w-full text-center justify-center rounded  px-8 pt-6 pb-8 mb-4"
