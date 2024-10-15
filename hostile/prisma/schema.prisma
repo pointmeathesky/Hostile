@@ -1,105 +1,6 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// generator client {
-//   provider = "prisma-client-js"
-// }
-//
-// datasource db {
-//   provider = "postgresql"
-//   url      = env("DATABASE_URL")
-// }
-//
-// model User {
-//   id        String   @id @default(uuid())
-//   createdAt DateTime @default(now())
-//   username  String   @unique
-//   password  String
-//   posts     Post[]
-//   comments Comment[]
-//   session Session[]
-// }
-//
-// model Session {
-//   id        String   @id @default(uuid())
-//   userId    String
-//   valid     Boolean  @default(true)
-//   userAgent String?
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-//   user      User     @relation(fields: [userId], references: [id])
-// }
-//
-// model Post {
-//   id        String   @id @default(uuid())
-//   createdAt DateTime @default(now())
-//
-//   name        String   @db.VarChar(255)
-//   body        String   @db.VarChar(1024)
-//   belongsToId String
-//   belongsTo   User     @relation(fields: [belongsToId], references: [id])
-//   updates     Update[]
-//   comments Comment[]
-//
-//   @@unique([id, belongsToId])
-// }
-//
-// model Comment {
-//   id        String   @id @default(uuid())
-//   createdAt DateTime @default(now())
-//
-//   body        String   @db.VarChar(1024)
-//   belongsToId String
-//   belongsTo   User     @relation(fields: [belongsToId], references: [id])
-//   postId  String
-//   post Post     @relation(fields: [postId], references: [id], map: "Comment_Post_fkey")
-//   updates     Update[]
-//
-//   @@unique([id, belongsToId])
-//   @@unique([id, postId])
-// }
-//
-// enum UPDATE_STATUS {
-//   IN_PROGRESS
-//   SHIPPED
-//   DEPRECATED
-// }
-//
-// model Update {
-//   id        String   @id @default(uuid())
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-//
-//   title   String
-//   body    String
-//   status  UPDATE_STATUS @default(IN_PROGRESS)
-//   version String?
-//   asset   String?
-//
-//   postId       String
-//   post         Post          @relation(fields: [postId], references: [id])
-//   updatePoints UpdatePoint[]
-//   commentId  String?  // the ? makes it optional
-//   comment    Comment? @relation(fields: [commentId], references: [id])
-//
-// }
-//
-// model UpdatePoint {
-//   id        String   @id @default(uuid())
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime
-//
-//   name        String @db.VarChar(255)
-//   description String
-//
-//   updateId String
-//   update   Update @relation(fields: [updateId], references: [id])
-// }
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
 }
 
 datasource db {
@@ -107,14 +8,31 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id        String    @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt DateTime  @default(now())
-  username  String    @unique
-  password  String
-  posts     Post[]    @relation("UserPosts")
-  comments  Comment[] @relation("UserComments")
-  sessions  Session[]
+model Comment {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt   DateTime @default(now())
+  body        String
+  belongsToId String   @db.ObjectId
+  belongsTo   User     @relation(fields: [belongsToId], references: [id])
+  postId      String   @db.ObjectId
+  post        Post     @relation(fields: [postId], references: [id])
+  updates     Update[]
+
+  @@index([id, belongsToId])
+  @@index([id, postId])
+}
+
+model Post {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt   DateTime  @default(now())
+  name        String
+  body        String
+  belongsToId String    @db.ObjectId
+  belongsTo   User      @relation(fields: [belongsToId], references: [id])
+  updates     Update[]
+  comments    Comment[]
+
+  @@index([id, belongsToId])
 }
 
 model Session {
@@ -127,33 +45,14 @@ model Session {
   user      User     @relation(fields: [userId], references: [id])
 }
 
-model Post {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt DateTime @default(now())
-
-  name        String
-  body        String
-  belongsToId String    @db.ObjectId
-  belongsTo   User      @relation(name: "UserPosts", fields: [belongsToId], references: [id])
-  updates     Update[]  @relation("PostUpdates")
-  comments    Comment[] @relation("PostComments")
-
-  @@index([belongsToId])
-}
-
-model Comment {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt DateTime @default(now())
-
-  body        String
-  belongsToId String   @db.ObjectId
-  belongsTo   User     @relation(name: "UserComments", fields: [belongsToId], references: [id])
-  postId      String   @db.ObjectId
-  post        Post     @relation(name: "PostComments", fields: [postId], references: [id])
-  updates     Update[] @relation("CommentUpdates")
-
-  @@index([belongsToId])
-  @@index([postId])
+model User {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime  @default(now())
+  username  String    @unique
+  password  String
+  posts     Post[]
+  comments  Comment[]
+  sessions  Session[]
 }
 
 enum UPDATE_STATUS {
@@ -163,31 +62,27 @@ enum UPDATE_STATUS {
 }
 
 model Update {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  title   String
-  body    String
-  status  UPDATE_STATUS @default(IN_PROGRESS)
-  version String?
-  asset   String?
-
-  postId       String?       @db.ObjectId
-  post         Post?         @relation(name: "PostUpdates", fields: [postId], references: [id])
-  commentId    String?       @db.ObjectId
-  comment      Comment?      @relation(name: "CommentUpdates", fields: [commentId], references: [id])
+  id           String        @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  title        String
+  body         String
+  status       UPDATE_STATUS @default(IN_PROGRESS)
+  version      String?
+  asset        String?
+  postId       String        @db.ObjectId
+  post         Post          @relation(fields: [postId], references: [id])
   updatePoints UpdatePoint[]
+  commentId    String?       @db.ObjectId
+  comment      Comment?      @relation(fields: [commentId], references: [id])
 }
 
 model UpdatePoint {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
   name        String
   description String
-
-  updateId String @db.ObjectId
-  update   Update @relation(fields: [updateId], references: [id])
+  updateId    String   @db.ObjectId
+  update      Update   @relation(fields: [updateId], references: [id])
 }

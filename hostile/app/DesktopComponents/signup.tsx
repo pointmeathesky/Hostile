@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import validator from 'validator';
 import Image from 'next/image';
+import { signIn } from 'next-auth/react';
 
 const SignUp = ({ handleContentChange, onClose }) => {
     const [badPass, setBadPass] = useState('');
@@ -26,6 +27,47 @@ const SignUp = ({ handleContentChange, onClose }) => {
             setBadPass("Password must be at least 8 characters");
         }
     };
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        // Get the form data
+        const formData = new FormData(event.target);
+        const username = formData.get('Username');
+        const password = formData.get('Password');
+
+        try {
+            const response = await fetch('/api/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            });
+
+            if (response?.ok) {
+                const loginResult = await signIn('credentials', {
+                    redirect: false, // prevent automatic redirection
+                    username,
+                    password,
+                });
+
+                if (loginResult?.ok) {
+                    // Navigate to the profile or perform other actions on successful login
+                    handleContentChange('profile', {}, onClose);
+                    onClose();
+                } else {
+                    console.error('Login failed after registration:', loginResult?.error);
+                }
+            } else {
+                // Handle error (e.g., user creation failed)
+                const result = await response.json();
+                console.error('Error:', result.error);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
 
     return (
         <div className=" h-min w-full bg-white border-4 border-panelgray justify-center mb-4 ">
@@ -33,11 +75,12 @@ const SignUp = ({ handleContentChange, onClose }) => {
                 <h1 className={"text-2xl font-bold text-center p-2"}>Welcome to Hostile!</h1>
             </div>
             <div className={`flex flex-row  w-full basis-1/6 pt-2 justify-center  `}>
-                <Image className="object-contain size-1/6 " src="/logo3.png" alt={"logo"} />
+                <Image className="object-contain size-1/6 " src="/logo3.png" width={30} height={30} alt={"logo"} />
             </div>
             <form
                 className=" text-black w-full text-center justify-center rounded  px-8 pt-6 pb-8 mb-4"
-                action="/user" method="post">
+                onSubmit={handleSubmit}
+            >
                 <div className="p-4 ">
                     <input className=" py-2  px-3 border border-black min-w-40" type="text" placeholder="Username"
                            autoComplete="username" required={true} name="Username" id="uname" /><br></br>

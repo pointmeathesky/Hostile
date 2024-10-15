@@ -67,7 +67,7 @@ const DraggableWindow = ({ title, children, onClose, onMinimize, zIndex, bringTo
             >
                 {/* Top panel */}
                 <div className="flex flex-row items-center bg-bargray border-b draggable-handle cursor-move">
-                    <Image className="object-contain" src="/inet.png" alt={"internet icon"} />
+                    <Image className="object-contain" src="/inet.png" width={20} height={20} alt={"internet icon"} />
                     <p className="text-white text-start">{title}</p>
                     <div className="flex ml-auto justify-end pr-1 font-bold">
                         <button
@@ -114,7 +114,7 @@ const DraggableWindow = ({ title, children, onClose, onMinimize, zIndex, bringTo
 
                 {/* Bottom panel */}
                 <div className="flex flex-row bg-panelgray text-black">
-                    <Image className="my-1 px-1 self-center" src="/inet.png" alt={"internet icon"}/>
+                    <Image className="my-1 px-1 self-center" src="/inet.png" width={20} height={20} alt={"internet icon"}/>
                     <p className="text-sm self-center">Done</p>
                 </div>
             </div>

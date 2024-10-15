@@ -38,7 +38,7 @@ function SignUp({ handleContentChange, onClose }) {
                 <h1 className={"text-2xl font-bold text-center p-2"}>Welcome to Hostile!</h1>
             </div>
             <div className={`flex flex-row w-full basis-1/6 pt-2 justify-center`}>
-                <Image className="object-contain size-1/6" src="/logo3.png" alt={"logo"}/>
+                <Image className="object-contain size-1/6" src="/logo3.png" width={30} height={30} alt={"logo"}/>
             </div>
             {error && <p className={"text-red-600 text-center pt-6"} >{error}</p>}
             <form

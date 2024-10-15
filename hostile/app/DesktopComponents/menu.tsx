@@ -36,7 +36,7 @@ const Page = () => {
                     </div>
                     <div className="flex-1 flex justify-center pb-4">
                         <Image
-                            src="https://www.webdesignmuseum.org/uploaded/exhibitions/web-banners-in-the-90s/at-t-the-first-banner-1994.png"
+                            src="https://www.webdesignmuseum.org/uploaded/exhibitions/web-banners-in-the-90s/at-t-the-first-banner-1994.png" width={30} height={30}
                             alt="The first web banner AT&amp;T 1994" title="The first web banner AT&amp;T 1994"
                         />
                     </div>
@@ -65,7 +65,7 @@ const Page = () => {
                             className="bannerAd flex items-center justify-center w-full h-full pb-6">
                             <a>
                                 <Image className="border border-black"
-                                    src="https://www.webdesignmuseum.org/uploaded/exhibitions/web-banners-in-the-90s/macromedia-flash-3-1998.gif"
+                                    src="https://www.webdesignmuseum.org/uploaded/exhibitions/web-banners-in-the-90s/macromedia-flash-3-1998.gif" width={30} height={30}
                                     alt="Macromedia Flash 3.0 1998" title="Macromedia Flash 3.0 1998"
                                 />
                             </a>
@@ -76,11 +76,13 @@ const Page = () => {
                         <div className="pr-4">
                             <Image
                                 src="https://www.webdesignmuseum.org/uploaded/exhibitions/web-banners-in-the-90s/get-flash-player-1996.gif"
+                                width={30} height={30}
                                 alt="Get Flash Player banner 1996" title="Get Flash Player 1996"/>
                         </div>
                         <div className="pr-4">
                             <Image
                                 src="https://www.webdesignmuseum.org/uploaded/exhibitions/web-banners-in-the-90s/netscape-1995.gif"
+                                width={30} height={30}
                                 alt="Netscape banner 1995"
                                 title="Netscape 1995"
                             />
@@ -89,6 +91,7 @@ const Page = () => {
                             <div className="pr-4" onClick={openImageModal}>
                                 <Image
                                     src="https://www.webdesignmuseum.org/uploaded/exhibitions/web-banners-in-the-90s/internet-explorer-1996.gif"
+                                    width={30} height={30}
                                     alt="Internet Explorer banner 1996"
                                     title="Internet Explorer 1996"
                                 />

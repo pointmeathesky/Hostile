@@ -19,7 +19,7 @@ interface Comment {
     postId: string;
 }
 
-const Profile = ({ onPostSelect }) => {
+const Profile = ({ onPostSelect, handleContentChange, onClose }) => {
     const { data: session, status } = useSession();
     const [posts, setPosts] = useState<Post[]>([]);
     const [loading, setLoading] = useState(true);
@@ -127,7 +127,7 @@ const Profile = ({ onPostSelect }) => {
         <div>
             <button className="border-b-2 r" onClick={handleLogout}>Logout</button>
 
-            <h1 className="text-4xl font-bold text-center ">{session?.user?.name || 'User'}&apos;s Profile</h1>
+            <h1 className="text-4xl font-bold text-center ">{session?.user?.name || 'User'}</h1>
             <Tabs>
                 <TabList>
                     <Tab>Posts</Tab>
@@ -142,8 +142,9 @@ const Profile = ({ onPostSelect }) => {
                     ) : posts.length > 0 ? (
                         <ul className="pb-4">
                             {posts.map((post) => (
-                                <li className="pb-2 " key={post.id} >
-                                    <div className={"cursor-pointer hover:underline"} onClick={() => onPostSelect(post.id)}>{post.name}</div>
+                                <li className="pb-2 " key={post.id}>
+                                    <div className={"cursor-pointer hover:underline"}
+                                         onClick={() => onPostSelect(post.id)}>{post.name}</div>
                                     <button className={"text-xs text-gray-500 border-b"}
                                             onClick={() => handleDelete(post.id)}>Delete Post
                                     </button>
@@ -151,7 +152,19 @@ const Profile = ({ onPostSelect }) => {
                             ))}
                         </ul>
                     ) : (
-                        <p>No posts yet.</p>
+                        <span>
+                            No posts yet,{" "}
+                            <span
+                                className="cursor-pointer underline underline-offset-1"
+                                onClick={() => {
+                                    handleContentChange('post', {}, onClose);
+                                }}
+                            >
+                                Create One
+                            </span>
+                        </span>
+
+
                     )}</h2>
                 </TabPanel>
                 <TabPanel>

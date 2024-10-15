@@ -1,0 +1,37 @@
+services:
+  mongo_container:
+    image: mongo:latest
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    networks:
+      - hostile_network
+    volumes:
+      - mongo-data:/data/db
+    command: --replSet rs0 # Add this line to enable replica set
+
+  hostile:
+    # Use a development-specific Dockerfile
+    build:
+      context: ./hostile
+      dockerfile: Dockerfile.dev # Make sure this Dockerfile is in the hostile directory
+    restart: unless-stopped
+    networks:
+      - hostile_network
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./hostile:/app # Mount the hostile folder to /app in the container
+      - /app/node_modules # Prevent node_modules from being overwritten
+    environment:
+      - NODE_ENV=development
+      - MONGO_URI=mongodb://hostile-mongo_container-1:27017/hostile # Connect to your MongoDB container
+    depends_on:
+      - mongo_container
+
+networks:
+  hostile_network:
+    driver: bridge
+
+volumes:
+  mongo-data:

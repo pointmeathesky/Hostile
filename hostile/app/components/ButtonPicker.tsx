@@ -101,7 +101,7 @@ const ButtonPicker = () => {
   return (
     <div className='flex flex-row'>
       {selectedButtons.map((button, index) => (
-        <Image  key={index} src={"https://webpage-1990-colourised.neocities.org/" + button} alt={`Button ${index + 1}`} className="mr-4 mb-1" />
+        <Image  key={index} src={"https://webpage-1990-colourised.neocities.org/" + button} alt={`Button ${index + 1}`} width={75} height={75} className="mr-4 mb-1" />
       ))}
     </div>
   );

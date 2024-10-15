@@ -99,38 +99,43 @@ function Desktop() {
     const SignIn = ({ onPostSelect }: SignInProps) => {
         return (
             <div>
-                <button className="mx-2 mt-8 px-4 text-sm hover:text-white hover:bg-blue-900 hover:bg-opacity-50"
-                        onClick={() => handleContentChange('signup')}>
-                    <Image src="/sign.png" alt={"sign"} />
-                    Sign In
+                <button
+                    className="mx-2 mt-8 px-4 text-sm hover:text-white hover:bg-blue-900 hover:bg-opacity-50 flex flex-col items-center"
+                    onClick={() => handleContentChange('signup')}
+                >
+                    <Image src="/sign.png" width={30} height={30} alt="sign"/>
+                    <span>Sign In</span>
                 </button>
             </div>
+
         );
     };
 
     const ProfileButton = () => {
         return (
+
             <div>
                 <button
-                    className="mx-2 mt-8 px-4 text-sm hover:text-white hover:bg-blue-900 hover:bg-opacity-50"
+                    className="mx-2 mt-8 px-4 text-sm hover:text-white hover:bg-blue-900 hover:bg-opacity-50 flex flex-col items-center"
                     onClick={() => handleContentChange('profile')}
                 >
-                    <Image src="/sign.png" alt={"sign"}/>
-                    Profile
-                </button>
-            </div>
-        );
+                    <Image src="/sign.png" width={30} height={30} alt="sign"/>
+                <span>Profile</span>
+            </button>
+        </div>
+
+    );
     };
 
     const PostsButton = () => {
         return (
             <div>
                 <button
-                    className="mx-2 mt-8 px-4 text-sm hover:text-white hover:bg-blue-900 hover:bg-opacity-50"
+                    className="mx-2 mt-8 px-4 text-sm hover:text-white hover:bg-blue-900 hover:bg-opacity-50 flex flex-col items-center"
                     onClick={() => handleContentChange('posts')}
                 >
-                    <Image className="object-contain h-14" src="/abyss.png" alt={"abyss"}/>
-                    Abyss
+                    <Image src="/abyss.png" width={30} height={30} alt="abyss"/>
+                    <span>Abyss</span>
                 </button>
             </div>
         );
@@ -140,11 +145,11 @@ function Desktop() {
         return (
             <div>
                 <button
-                    className="mx-2 mt-8 px-4 text-sm hover:text-white hover:bg-blue-900 hover:bg-opacity-50"
+                    className="mx-2 mt-8 px-4 text-sm hover:text-white hover:bg-blue-900 hover:bg-opacity-50 flex flex-col items-center"
                     onClick={() => handleContentChange('post')}
                 >
-                    <Image  src="/post.png" alt={"post"}/>
-                    Post
+                    <Image src="/post.png" width={30} height={30} alt="post"/>
+                    <span>Post</span>
                 </button>
             </div>
         );
@@ -154,11 +159,11 @@ function Desktop() {
         return (
             <div>
                 <button
-                    className="mx-1 mt-8 px-4 text-sm hover:text-white hover:bg-blue-900 hover:bg-opacity-50"
+                    className="mx-2 mt-8 px-4 text-sm hover:text-white hover:bg-blue-900 hover:bg-opacity-50 flex flex-col items-center"
                     onClick={() => handleContentChange('menu')}
                 >
-                    <Image src="/disc.png" alt={"disc"} />
-                    Discover
+                    <Image src="/disc.png" width={30} height={30} alt="disc"/>
+                    <span>Discover</span>
                 </button>
             </div>
         );
@@ -172,8 +177,8 @@ function Desktop() {
         <div className={`${colo} bg-backblue`}>
             <div className="flex flex-row">
                 <div className="flex flex-col min-h-screen">
-                    {session ? <ProfileButton /> : <SignIn />}
-                    {session ? <PostButton /> :<div></div> }
+                    {session ? <ProfileButton/> : <SignIn/>}
+                    {session ? <PostButton/> : <div></div>}
                     <MenuButton />
                     <PostsButton />
                 </div>
@@ -204,7 +209,7 @@ function Desktop() {
                                 >
                                     {window.type === 'signin' && <Login handleContentChange={handleContentChange} onClose={() => handleCloseWindow(window.id)}/>}
                                     {window.type === 'signup' && <SignUp handleContentChange={handleContentChange} onClose={() => handleCloseWindow(window.id)} />}
-                                    {window.type === 'profile' && <Profile onPostSelect={handlePostSelect} />}
+                                    {window.type === 'profile' && <Profile onPostSelect={handlePostSelect} handleContentChange={handleContentChange} onClose={() => handleCloseWindow(window.id)} />}
                                     {window.type === 'posts' && <PostsList onPostSelect={handlePostSelect} />}
                                     {window.type === 'singlePost' && window.params?.postId && (
                                         <SinglePost
@@ -222,7 +227,7 @@ function Desktop() {
                 className="fixed bottom-0 bg-panelgray text-black flex flex-row items-center  w-full h-7 text-lg border-t">
                 <button onClick={invColors} className="mx-2 px-2 shadow-lg border border-cus border-opacity-75">
                     <div className="flex flex-row">
-                        <Image src="/win.png" alt={"computer"} />
+                        <Image src="/win.png" width={20} height={20} alt={"computer"} />
                         <span className="text-sm px-2">Start</span>
                     </div>
                 </button>
